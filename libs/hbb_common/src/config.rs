@@ -79,8 +79,16 @@ lazy_static::lazy_static! {
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
-    pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
-    pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new(HashMap::from([
+        // Hosteg: modo "somente receber" (esconde painel de conectar e dica de servidor)
+        ("conn-type".to_owned(), "incoming".to_owned()),
+    ]));
+    pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new(HashMap::from([
+        // Hosteg: interface enxuta e travada
+        ("hide-powered-by-me".to_owned(), "Y".to_owned()),
+        ("hide-help-cards".to_owned(), "Y".to_owned()),
+        ("hide-network-settings".to_owned(), "Y".to_owned()),
+    ]));
 }
 
 #[cfg(target_os = "android")]
